@@ -1,0 +1,17 @@
+PODS:
+  - Crashlytics (3.6.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.5)
+  - KCFloatingActionButton (1.1.9)
+
+DEPENDENCIES:
+  - Crashlytics
+  - Fabric
+  - KCFloatingActionButton
+
+SPEC CHECKSUMS:
+  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
+  Fabric: 338ffd3c2afcab120638907b4251189de9ad17b3
+  KCFloatingActionButton: fc51d1e88143000c7ab4a22d754be9129202cdc6
+
+COCOAPODS: 0.39.0

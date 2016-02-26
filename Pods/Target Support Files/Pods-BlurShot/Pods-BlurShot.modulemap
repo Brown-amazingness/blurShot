@@ -1,0 +1,6 @@
+framework module Pods_BlurShot {
+  umbrella header "Pods-BlurShot-umbrella.h"
+
+  export *
+  module * { export * }
+}
