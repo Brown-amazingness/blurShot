@@ -99,7 +99,8 @@
     
     //gestures!
     
-
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectiveBlur:)];
+    [self.view addGestureRecognizer:pan];
     
     
 }
@@ -127,7 +128,29 @@
 }
 
 
-
+-(void)createSelectiveBlur:(UIPanGestureRecognizer *)pan{
+    //We need to check if selective blurring is toggled
+    //if (selectiveBlurEnabled)
+    
+    
+    
+    CGPoint start;
+    CGPoint end;
+    CGFloat width;
+    CGFloat height;
+    
+    if (pan.state == UIGestureRecognizerStateBegan ) {
+        start = [pan translationInView:self.view];
+        
+    }else if (pan.state == UIGestureRecognizerStateEnded){
+        end = [pan locationInView:self.view];
+        width = fabs(start.x - end.x);
+        height = fabs(start.y - end.y);
+        CGRect frame = CGRectMake(end.x, end.y, width, height);
+        _blurView.frame = frame;
+    }
+    
+}
 -(void)screenshotAndSaveImage:(BOOL)saveImage
 {
     
