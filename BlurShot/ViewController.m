@@ -99,8 +99,7 @@
     
     //gestures!
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectiveBlur:)];
-    [self.view addGestureRecognizer:pan];
+
     
     
 }
