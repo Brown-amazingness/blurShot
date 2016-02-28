@@ -37,45 +37,39 @@
                             </imageView>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTk-is-9WJ" customClass="FXBlurView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="240" translatesAutoresizingMaskIntoConstraints="NO" id="92g-Vn-RMT">
-                                        <rect key="frame" x="18" y="562" width="500" height="31"/>
-                                        <connections>
-                                            <action selector="blurSliderMoved:" destination="BYZ-38-t0r" eventType="valueChanged" id="hzL-Uy-Rmf"/>
-                                        </connections>
-                                    </slider>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqE-Tk-ARp" customClass="KCFloatingActionButton" customModule="KCFloatingActionButton">
-                                        <rect key="frame" x="536" y="536" width="56" height="56"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="56" id="Ed3-pf-euT"/>
-                                            <constraint firstAttribute="width" secondItem="rqE-Tk-ARp" secondAttribute="height" multiplier="1:1" id="LOU-v4-U0z"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="92g-Vn-RMT">
+                                <rect key="frame" x="18" y="562" width="480" height="31"/>
+                                <connections>
+                                    <action selector="blurSliderMoved:" destination="BYZ-38-t0r" eventType="valueChanged" id="hzL-Uy-Rmf"/>
+                                </connections>
+                            </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqE-Tk-ARp" customClass="KCFloatingActionButton" customModule="KCFloatingActionButton">
+                                <rect key="frame" x="524" y="536" width="56" height="56"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="rqE-Tk-ARp" secondAttribute="bottom" constant="8" id="4cY-VT-Z0g"/>
-                                    <constraint firstItem="rqE-Tk-ARp" firstAttribute="leading" secondItem="92g-Vn-RMT" secondAttribute="trailing" constant="20" id="PS8-tj-urO"/>
-                                    <constraint firstItem="92g-Vn-RMT" firstAttribute="leading" secondItem="fTk-is-9WJ" secondAttribute="leading" constant="20" id="SrK-Ns-Jeb"/>
-                                    <constraint firstAttribute="bottom" secondItem="92g-Vn-RMT" secondAttribute="bottom" constant="8" id="akZ-7w-YtM"/>
-                                    <constraint firstAttribute="trailing" secondItem="rqE-Tk-ARp" secondAttribute="trailing" constant="8" id="n6Y-1a-8U6"/>
-                                    <constraint firstAttribute="trailing" secondItem="rqE-Tk-ARp" secondAttribute="trailing" constant="8" id="umR-OD-sGR"/>
-                                    <constraint firstAttribute="bottom" secondItem="rqE-Tk-ARp" secondAttribute="bottom" constant="8" id="uxS-5s-kQ7"/>
+                                    <constraint firstAttribute="width" constant="56" id="Ed3-pf-euT"/>
+                                    <constraint firstAttribute="width" secondItem="rqE-Tk-ARp" secondAttribute="height" multiplier="1:1" id="LOU-v4-U0z"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fTk-is-9WJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="22v-vA-zPQ"/>
+                            <constraint firstItem="rqE-Tk-ARp" firstAttribute="leading" secondItem="92g-Vn-RMT" secondAttribute="trailing" constant="28" id="4wH-u9-u6B"/>
                             <constraint firstItem="bDW-JQ-g2K" firstAttribute="centerY" secondItem="LMs-bP-qhp" secondAttribute="centerY" id="5fH-UU-EBg"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rqE-Tk-ARp" secondAttribute="bottom" constant="8" id="6cH-JZ-41r"/>
                             <constraint firstItem="LMs-bP-qhp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="6kV-q4-4oM"/>
                             <constraint firstItem="LMs-bP-qhp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Bve-E4-yCn"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="92g-Vn-RMT" secondAttribute="bottom" constant="8" id="DN4-bc-QPq"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LMs-bP-qhp" secondAttribute="bottom" id="Kj9-vQ-UGf"/>
+                            <constraint firstItem="92g-Vn-RMT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="XJe-hW-M8V"/>
                             <constraint firstItem="bDW-JQ-g2K" firstAttribute="centerX" secondItem="LMs-bP-qhp" secondAttribute="centerX" id="Yo4-1F-iS1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LMs-bP-qhp" secondAttribute="trailing" constant="-20" id="dqc-lI-qCq"/>
                             <constraint firstItem="fTk-is-9WJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="gEO-yT-2T4"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fTk-is-9WJ" secondAttribute="bottom" id="hze-vc-gR2"/>
                             <constraint firstItem="fTk-is-9WJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="kPG-yQ-YOO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="fTk-is-9WJ" secondAttribute="trailing" constant="-20" id="l4R-la-RSs"/>
+                            <constraint firstItem="rqE-Tk-ARp" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="qqI-d5-GLs"/>
                         </constraints>
                     </view>
                     <connections>

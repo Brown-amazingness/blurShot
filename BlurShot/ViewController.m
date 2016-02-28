@@ -8,8 +8,9 @@
 #import "ViewController.h"
 
 @interface ViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property UIImage *screengrab;
 @property bool hasTapped;
+@property (nonatomic) CGPoint startPoint;
+@property (nonatomic) CGPoint endPoint;
 @end
 
 @implementation ViewController
@@ -29,6 +30,7 @@
     self.blurSlider.translatesAutoresizingMaskIntoConstraints = NO;
     self.blurView.tintColor = [UIColor clearColor];
     
+    _blurView.updateInterval = 1;
     
     [self prefersStatusBarHidden];
     self.blurView.blurRadius = self.blurSlider.value;
@@ -104,10 +106,10 @@
     
     //gestures!
     
-    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectiveBlur:)];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectiveBlur:)];
     
-    pan.numberOfTapsRequired = 2;
-    [self.blurView addGestureRecognizer:pan];
+    
+    [self.view addGestureRecognizer:pan];
     
     
 }
@@ -135,32 +137,35 @@
 }
 
 
--(void)createSelectiveBlur:(UITapGestureRecognizer *)pan{
 
-    CGFloat width;
-    CGFloat height;
-    CGRect frame;
+- (void)blurRectFromGesture:(UIPanGestureRecognizer*)pan {
     
-        NSLog(@"%d",_hasTapped);
-            if (!_hasTapped) {
-                self.startPoint = [pan locationInView:pan.view];
-                NSLog(@"this statement occured");
-                _hasTapped = YES;
-                NSLog(@"%d",_hasTapped);
-            }else if (_hasTapped){
-                NSLog(@"second statement has %d",_hasTapped);
-                self.endPoint = [pan locationInView:pan.view];
-                width = fabs(_endPoint.x - _startPoint.x);
-                height = fabs(_endPoint.y - _startPoint.y);
-                frame = CGRectMake(MIN(_startPoint.x, _endPoint.x), MIN(_startPoint.y, _endPoint.y), width, height);
-                _blurView.frame = frame;
-                _hasTapped = NO;
-                _blurSlider.hidden = NO;
-                [self.view bringSubviewToFront:_blurSlider];
-            }
-            
-            
+    // Don't update if not two fingers touching
+    if (pan.numberOfTouches != 2) {
+        return;
+    }
+    
+    CGPoint p1 = [pan locationOfTouch:0 inView:pan.view];
+    CGPoint p2 = [pan locationOfTouch:1 inView:pan.view];
+    
+    _blurView.frame = CGRectMake(MIN(p1.x, p2.x),
+                                 MIN(p1.y, p2.y),
+                                 fabs(p2.x-p1.x),
+                                 fabs(p2.y-p1.y));
 }
+
+-(void)createSelectiveBlur:(UIPanGestureRecognizer *)pan{
+    // I added properties CGPoint startPoint and endPoint to class
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        [self blurRectFromGesture:pan];
+    } else if (pan.state == UIGestureRecognizerStateChanged) {
+        [self blurRectFromGesture:pan];
+    } else if (pan.state == UIGestureRecognizerStateRecognized) {
+        // Need to do anything else when user ends gesture ?
+    }
+    
+}
+
 -(void)screenshotAndSaveImage:(BOOL)saveImage
 {
     
