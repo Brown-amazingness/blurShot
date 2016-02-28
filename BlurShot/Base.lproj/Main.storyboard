@@ -68,11 +68,8 @@
                             <constraint firstItem="fTk-is-9WJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="22v-vA-zPQ"/>
                             <constraint firstItem="bDW-JQ-g2K" firstAttribute="centerY" secondItem="LMs-bP-qhp" secondAttribute="centerY" id="5fH-UU-EBg"/>
                             <constraint firstItem="LMs-bP-qhp" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="6kV-q4-4oM"/>
-                            <constraint firstItem="fTk-is-9WJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6kb-GL-90i"/>
                             <constraint firstItem="LMs-bP-qhp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Bve-E4-yCn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LMs-bP-qhp" secondAttribute="bottom" id="Kj9-vQ-UGf"/>
-                            <constraint firstItem="fTk-is-9WJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QNc-ka-Iqs"/>
-                            <constraint firstItem="fTk-is-9WJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="X6x-yK-ykh"/>
                             <constraint firstItem="bDW-JQ-g2K" firstAttribute="centerX" secondItem="LMs-bP-qhp" secondAttribute="centerX" id="Yo4-1F-iS1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LMs-bP-qhp" secondAttribute="trailing" constant="-20" id="dqc-lI-qCq"/>
                             <constraint firstItem="fTk-is-9WJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="gEO-yT-2T4"/>

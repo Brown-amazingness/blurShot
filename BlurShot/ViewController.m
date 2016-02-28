@@ -9,6 +9,7 @@
 
 @interface ViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property UIImage *screengrab;
+@property bool hasTapped;
 @end
 
 @implementation ViewController
@@ -22,13 +23,17 @@
     
     
     [super viewDidLoad];
-    
+    self.blurView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.menuButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.blurSlider.translatesAutoresizingMaskIntoConstraints = NO;
     self.blurView.tintColor = [UIColor clearColor];
     
     
     [self prefersStatusBarHidden];
     self.blurView.blurRadius = self.blurSlider.value;
     self.blurView.blurEnabled = NO;
+    
     
     if (_imageView.image) {
         self.TutorialLabel.hidden = YES;
@@ -99,8 +104,10 @@
     
     //gestures!
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectiveBlur:)];
-    [self.view addGestureRecognizer:pan];
+    UITapGestureRecognizer *pan = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectiveBlur:)];
+    
+    pan.numberOfTapsRequired = 2;
+    [self.blurView addGestureRecognizer:pan];
     
     
 }
@@ -128,28 +135,31 @@
 }
 
 
--(void)createSelectiveBlur:(UIPanGestureRecognizer *)pan{
-    //We need to check if selective blurring is toggled
-    //if (selectiveBlurEnabled)
-    
-    
-    
-    CGPoint start;
-    CGPoint end;
+-(void)createSelectiveBlur:(UITapGestureRecognizer *)pan{
+
     CGFloat width;
     CGFloat height;
+    CGRect frame;
     
-    if (pan.state == UIGestureRecognizerStateBegan ) {
-        start = [pan translationInView:self.view];
-        
-    }else if (pan.state == UIGestureRecognizerStateEnded){
-        end = [pan locationInView:self.view];
-        width = fabs(start.x - end.x);
-        height = fabs(start.y - end.y);
-        CGRect frame = CGRectMake(end.x, end.y, width, height);
-        _blurView.frame = frame;
-    }
-    
+        NSLog(@"%d",_hasTapped);
+            if (!_hasTapped) {
+                self.startPoint = [pan locationInView:pan.view];
+                NSLog(@"this statement occured");
+                _hasTapped = YES;
+                NSLog(@"%d",_hasTapped);
+            }else if (_hasTapped){
+                NSLog(@"second statement has %d",_hasTapped);
+                self.endPoint = [pan locationInView:pan.view];
+                width = fabs(_endPoint.x - _startPoint.x);
+                height = fabs(_endPoint.y - _startPoint.y);
+                frame = CGRectMake(MIN(_startPoint.x, _endPoint.x), MIN(_startPoint.y, _endPoint.y), width, height);
+                _blurView.frame = frame;
+                _hasTapped = NO;
+                _blurSlider.hidden = NO;
+                [self.view bringSubviewToFront:_blurSlider];
+            }
+            
+            
 }
 -(void)screenshotAndSaveImage:(BOOL)saveImage
 {

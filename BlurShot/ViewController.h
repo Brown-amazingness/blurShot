@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIView *pictureView;
 
 @property (weak, nonatomic) IBOutlet UILabel *TutorialLabel;
+@property (nonatomic) CGPoint startPoint;
+@property (nonatomic) CGPoint endPoint;
 
 @property (weak, nonatomic) IBOutlet KCFloatingActionButton *menuButton;
 @property (weak, nonatomic) IBOutlet FXBlurView *blurView;
