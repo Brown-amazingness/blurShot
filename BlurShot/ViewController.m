@@ -8,6 +8,7 @@
 #import "ViewController.h"
 
 @interface ViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
 @property bool hasTapped;
 @property (nonatomic) CGPoint startPoint;
 @property (nonatomic) CGPoint endPoint;
@@ -104,6 +105,12 @@
         [_fab close];
     }];
     
+    
+    [self.menuButton addItem:@"Reset blur size" icon:[UIImage imageNamed:@"reset-icon"] handler:^(KCFloatingActionButtonItem * item) {
+        self.blurView.frame = self.view.frame;
+        [_fab close];
+        
+    }];
     //gestures!
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectiveBlur:)];
@@ -169,16 +176,20 @@
 -(void)screenshotAndSaveImage:(BOOL)saveImage
 {
     
-    UIView *wholeScreen = self.blurView;
+    UIView *wholeScreen = self.view;
 
     // define the size and grab a UIImage from it
     self.menuButton.hidden = YES;
     self.blurSlider.hidden = YES;
-    UIGraphicsBeginImageContextWithOptions(wholeScreen.bounds.size, YES, 0.5);
+    UIGraphicsBeginImageContextWithOptions(wholeScreen.bounds.size, NO, 0.0);
+   
+
+
     [wholeScreen.layer renderInContext:UIGraphicsGetCurrentContext()];
     [wholeScreen drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
     
     UIImage *screengrab = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
     self.screengrab = screengrab;
     if (saveImage) {
