@@ -25,13 +25,13 @@
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTk-is-9WJ" customClass="FXBlurView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDW-JQ-g2K">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDW-JQ-g2K">
                                         <rect key="frame" x="71" y="285" width="458" height="29"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Press The Blue Button To Begin and Pinch to customize blur size">
                                                 <attributes>
                                                     <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <font key="NSFont" size="18" name="SFUIDisplay-Light"/>
+                                                    <font key="NSFont" size="14" name="SFUIDisplay-Light"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                 </attributes>
                                             </fragment>
@@ -39,6 +39,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="bDW-JQ-g2K" firstAttribute="centerX" secondItem="fTk-is-9WJ" secondAttribute="centerX" id="1Fr-Bj-smG"/>
+                                    <constraint firstAttribute="trailing" secondItem="bDW-JQ-g2K" secondAttribute="trailing" constant="71" id="LCd-8f-Qzm"/>
+                                    <constraint firstItem="bDW-JQ-g2K" firstAttribute="leading" secondItem="fTk-is-9WJ" secondAttribute="leading" constant="71" id="UYB-OT-IvF"/>
+                                    <constraint firstItem="bDW-JQ-g2K" firstAttribute="centerY" secondItem="fTk-is-9WJ" secondAttribute="centerY" id="ncC-lY-ozd"/>
+                                </constraints>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="92g-Vn-RMT">
                                 <rect key="frame" x="18" y="562" width="480" height="31"/>
