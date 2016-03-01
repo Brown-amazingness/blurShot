@@ -16,15 +16,18 @@
 
 
 @interface ViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIView *pictureView;
+
+@property UIImage *screengrab;
 
 @property (weak, nonatomic) IBOutlet UILabel *TutorialLabel;
+
 
 @property (weak, nonatomic) IBOutlet KCFloatingActionButton *menuButton;
 @property (weak, nonatomic) IBOutlet FXBlurView *blurView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UISlider *blurSlider;
 - (IBAction)blurSliderMoved:(UISlider *)sender;
+@property (weak, nonatomic) IBOutlet UIView *pictureView;
 
 @end
 

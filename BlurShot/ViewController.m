@@ -8,7 +8,10 @@
 #import "ViewController.h"
 
 @interface ViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-@property UIImage *screengrab;
+
+@property bool hasTapped;
+@property (nonatomic) CGPoint startPoint;
+@property (nonatomic) CGPoint endPoint;
 @end
 
 @implementation ViewController
@@ -22,13 +25,18 @@
     
     
     [super viewDidLoad];
-    
+    self.blurView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.menuButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.blurSlider.translatesAutoresizingMaskIntoConstraints = NO;
     self.blurView.tintColor = [UIColor clearColor];
     
+    _blurView.updateInterval = 1;
     
     [self prefersStatusBarHidden];
     self.blurView.blurRadius = self.blurSlider.value;
     self.blurView.blurEnabled = NO;
+    
     
     if (_imageView.image) {
         self.TutorialLabel.hidden = YES;
@@ -97,9 +105,21 @@
         [_fab close];
     }];
     
+    
+    [self.menuButton addItem:@"Reset blur size" icon:[UIImage imageNamed:@"reset-icon"] handler:^(KCFloatingActionButtonItem * item) {
+        [FXBlurView setUpdatesEnabled];
+        self.blurView.frame = self.view.frame;
+        [self.blurView setNeedsDisplay];
+        [FXBlurView setUpdatesDisabled];
+        [_fab close];
+        
+    }];
     //gestures!
     
-
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(createSelectiveBlur:)];
+    
+    
+    [self.view addGestureRecognizer:pan];
     
     
 }
@@ -128,19 +148,51 @@
 
 
 
+- (void)blurRectFromGesture:(UIPanGestureRecognizer*)pan {
+    
+    // Don't update if not two fingers touching
+    if (pan.numberOfTouches != 2) {
+        return;
+    }
+    
+    CGPoint p1 = [pan locationOfTouch:0 inView:pan.view];
+    CGPoint p2 = [pan locationOfTouch:1 inView:pan.view];
+    
+    _blurView.frame = CGRectMake(MIN(p1.x, p2.x),
+                                 MIN(p1.y, p2.y),
+                                 fabs(p2.x-p1.x),
+                                 fabs(p2.y-p1.y));
+}
+
+-(void)createSelectiveBlur:(UIPanGestureRecognizer *)pan{
+    // I added properties CGPoint startPoint and endPoint to class
+    if (pan.state == UIGestureRecognizerStateBegan) {
+        [self blurRectFromGesture:pan];
+    } else if (pan.state == UIGestureRecognizerStateChanged) {
+        [self blurRectFromGesture:pan];
+    } else if (pan.state == UIGestureRecognizerStateRecognized) {
+        // Need to do anything else when user ends gesture ?
+    }
+    
+}
+
 -(void)screenshotAndSaveImage:(BOOL)saveImage
 {
     
-    UIView *wholeScreen = self.blurView;
+    UIView *wholeScreen = self.view;
 
     // define the size and grab a UIImage from it
     self.menuButton.hidden = YES;
     self.blurSlider.hidden = YES;
-    UIGraphicsBeginImageContextWithOptions(wholeScreen.bounds.size, YES, 0.5);
+    UIGraphicsBeginImageContextWithOptions(wholeScreen.bounds.size, NO, 0.0);
+   
+
+
     [wholeScreen.layer renderInContext:UIGraphicsGetCurrentContext()];
     [wholeScreen drawViewHierarchyInRect:self.view.bounds afterScreenUpdates:YES];
     
     UIImage *screengrab = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
     self.screengrab = screengrab;
     if (saveImage) {
