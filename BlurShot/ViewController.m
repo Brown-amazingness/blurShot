@@ -107,7 +107,10 @@
     
     
     [self.menuButton addItem:@"Reset blur size" icon:[UIImage imageNamed:@"reset-icon"] handler:^(KCFloatingActionButtonItem * item) {
+        [FXBlurView setUpdatesEnabled];
         self.blurView.frame = self.view.frame;
+        [self.blurView setNeedsDisplay];
+        [FXBlurView setUpdatesDisabled];
         [_fab close];
         
     }];
