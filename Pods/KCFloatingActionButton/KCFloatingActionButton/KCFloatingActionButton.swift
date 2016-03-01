@@ -32,12 +32,12 @@ public class KCFloatingActionButton: UIView {
     /**
         Padding from bottom right of UIScreen or superview.
     */
-    public var paddingX: CGFloat = 14 {
+    public var paddingX: CGFloat = 0 {
         didSet {
             self.setNeedsDisplay()
         }
     }
-    public var paddingY: CGFloat = 14 {
+    public var paddingY: CGFloat = 0 {
         didSet {
             self.setNeedsDisplay()
         }
